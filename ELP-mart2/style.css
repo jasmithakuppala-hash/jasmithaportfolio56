@@ -1,0 +1,39 @@
+.body-background{
+   background-color:rgb(99, 215, 188);
+}
+.div1{
+   border-radius: 20px;
+   text-align: center;
+   color:aliceblue;
+   background-color:darkred; 
+   width: 600px;;
+   padding: 20px;
+    margin:15px auto;
+}
+.div2{
+   border-radius:20px;
+   text-align: center;
+   color:aliceblue;
+   background-color:darkred; 
+   width:600px;     
+   padding: 15px; 
+   margin:15px auto;
+}
+.div3{
+    border-radius:20px;
+   text-align: center;
+   color:aliceblue;
+   background-color:darkred; 
+   width:600px;
+   padding:15px;
+   margin:15px auto; 
+}
+.div4{
+   border-radius:20px;
+   text-align: center;
+   color:aliceblue;
+   background-color: darkred; 
+   width:600px;
+   padding: 15px;
+   margin:15px auto;
+}

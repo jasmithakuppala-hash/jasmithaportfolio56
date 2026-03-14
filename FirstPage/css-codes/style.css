@@ -1,0 +1,18 @@
+.bodybackground{
+    align-content:center;
+    background-image: url("https://i.pinimg.com/1200x/04/0d/fe/040dfe4b1707c81e6a77a980e17e4ece.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    color:white;
+    font-family:Roboto;
+}
+.container{
+    border-radius: px;
+    text-align: center;
+    background-color:rgb(96, 21, 1);
+    width:50vw;
+    padding:40px;
+    border-style:solid;
+    border-color: rgb(244, 202, 154);
+    margin:140px;
+}
