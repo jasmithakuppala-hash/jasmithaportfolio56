@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>F1 PULSE — Formula 1 Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e10600;
+    --red-dark: #a00400;
+    --red-glow: rgba(225,6,0,0.4);
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #181818;
+    --border: #2a2a2a;
+    --text: #f0f0f0;
+    --muted: #888;
+    --gold: #f5c518;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 4px; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 4px; list-style: none; }
+  .nav-links a { display: block; padding: 8px 14px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); border-color: var(--red); }
+
+  /* ── HERO ── */
+  #home { min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; position: relative; overflow: hidden; padding-top: 64px; background: linear-gradient(180deg, #0a0a0a 0%, #150000 50%, #0a0a0a 100%); }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(225,6,0,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(225,6,0,0.06) 1px, transparent 1px); background-size: 60px 60px; animation: gridPulse 6s ease-in-out infinite; }
+  @keyframes gridPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .hero-stripe { position: absolute; left: 0; right: 0; height: 6px; background: var(--red); top: 50%; transform: translateY(-50%) scaleX(0); animation: stripeIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s forwards; box-shadow: 0 0 40px var(--red-glow); }
+  @keyframes stripeIn { to { transform: translateY(-50%) scaleX(1); } }
+  .hero-content { position: relative; z-index:2; }
+  .hero-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 14vw, 12rem); line-height: 0.9; letter-spacing: 6px; text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+  .hero-title .red { color: var(--red); text-shadow: 0 0 60px var(--red-glow); }
+  .hero-sub { font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: 1.3rem; letter-spacing: 4px; color: var(--muted); margin-top: 20px; opacity: 0; animation: fadeUp 0.8s ease 1s forwards; }
+  .hero-cta { margin-top: 40px; display: flex; gap: 16px; justify-content: center; opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards; }
+  .btn-red { padding: 14px 36px; background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); transition: background 0.2s, box-shadow 0.2s; }
+  .btn-red:hover { background: var(--red-dark); box-shadow: 0 0 30px var(--red-glow); }
+  .btn-outline { padding: 14px 36px; background: transparent; color: var(--text); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border: 2px solid var(--border); cursor: pointer; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 40px; }
+  .section-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 3px; line-height: 1; margin-bottom: 50px; }
+  .section-title .accent { color: var(--red); }
+
+  /* ── DRIVER SLIDER ── */
+  #drivers { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .slider-wrapper { position: relative; }
+  .slider-track-outer { overflow: hidden; margin: 0 -10px; padding: 10px; }
+  .slider-track { display: flex; gap: 24px; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+  .driver-card { min-width: 260px; background: var(--card); border: 1px solid var(--border); position: relative; overflow: hidden; flex-shrink: 0; transition: transform 0.3s, box-shadow 0.3s; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%); }
+  .driver-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(225,6,0,0.25); }
+  .driver-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); }
+  .driver-photo-wrap { width: 100%; height: 200px; overflow: hidden; background: linear-gradient(135deg, #1a0000, #1a1a1a); display: flex; align-items: center; justify-content: center; position: relative; }
+  .driver-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.4s; }
+  .driver-card:hover .driver-photo-wrap img { transform: scale(1.05); }
+  .driver-number-bg { position: absolute; right: -10px; bottom: -10px; font-family: 'Bebas Neue', sans-serif; font-size: 7rem; color: rgba(255,255,255,0.05); line-height: 1; pointer-events: none; user-select: none; }
+  .driver-info { padding: 20px; position: relative; }
+  .driver-caption { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .driver-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; line-height: 1; margin-bottom: 4px; }
+  .driver-team { font-size: 0.85rem; color: var(--muted); font-weight: 600; letter-spacing: 1px; }
+  .team-color-bar { height: 3px; width: 40px; margin-top: 12px; border-radius: 2px; }
+  .slider-nav { display: flex; gap: 12px; margin-top: 30px; }
+  .slider-btn { width: 50px; height: 50px; background: var(--card); border: 1px solid var(--border); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s; clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%); }
+  .slider-btn:hover { background: var(--red); border-color: var(--red); box-shadow: 0 0 20px var(--red-glow); }
+  .slider-dots { display: flex; gap: 8px; align-items: center; margin-left: 20px; }
+  .slider-dot { width: 8px; height: 8px; background: var(--border); border-radius: 50%; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .slider-dot.active { background: var(--red); transform: scale(1.4); }
+
+  /* ── SCHEDULE ── */
+  #schedule { background: var(--black); }
+  .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .race-card { background: var(--card); border: 1px solid var(--border); padding: 24px; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); }
+  .race-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(225,6,0,0.15); }
+  .race-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); }
+  .race-round { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+  .race-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 6px; }
+  .race-location { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; }
+  .race-date { display: inline-block; padding: 4px 12px; background: rgba(225,6,0,0.1); border: 1px solid rgba(225,6,0,0.3); font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 2px; color: var(--red); }
+
+  /* ── RACE WINNERS ── */
+  #race-winners { background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%); border-top: 1px solid var(--border); }
+  .winners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  .winner-card { background: var(--card); border: 1px solid var(--border); position: relative; overflow: hidden; text-align: center; transition: transform 0.3s, box-shadow 0.3s; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); }
+  .winner-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(225,6,0,0.2); }
+  .winner-card.top-1 { border-color: var(--gold); }
+  .winner-card.top-1::before { background: var(--gold); }
+  .winner-card.top-2 { border-color: #c0c0c0; }
+  .winner-card.top-2::before { background: #c0c0c0; }
+  .winner-card.top-3 { border-color: #cd7f32; }
+  .winner-card.top-3::before { background: #cd7f32; }
+  .winner-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--border); }
+  .winner-rank { position: absolute; top: 14px; left: 16px; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--muted); }
+  .winner-card.top-1 .winner-rank { color: var(--gold); }
+  .winner-card.top-2 .winner-rank { color: #c0c0c0; }
+  .winner-card.top-3 .winner-rank { color: #cd7f32; }
+  .winner-photo-wrap { width: 110px; height: 110px; border-radius: 50%; overflow: hidden; margin: 30px auto 16px; border: 3px solid var(--border); background: linear-gradient(135deg, #1a0000, #1a1a1a); }
+  .winner-card.top-1 .winner-photo-wrap { border-color: var(--gold); box-shadow: 0 0 20px rgba(245,197,24,0.3); }
+  .winner-card.top-2 .winner-photo-wrap { border-color: #c0c0c0; }
+  .winner-card.top-3 .winner-photo-wrap { border-color: #cd7f32; }
+  .winner-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .winner-info { padding: 0 20px 24px; }
+  .winner-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 4px; }
+  .winner-team { font-size: 0.8rem; color: var(--muted); margin-bottom: 14px; letter-spacing: 1px; }
+  .winner-wins { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(225,6,0,0.1); border: 1px solid rgba(225,6,0,0.3); }
+  .wins-count { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--red); line-height: 1; }
+  .wins-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+
+  /* ── TEAMS ── */
+  #teams { background: var(--dark); border-top: 1px solid var(--border); }
+  .teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .team-card { background: var(--card); border: 1px solid var(--border); padding: 28px; display: flex; align-items: center; gap: 20px; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%); }
+  .team-card:hover { transform: translateX(6px); border-color: rgba(225,6,0,0.4); box-shadow: -4px 0 20px rgba(225,6,0,0.1); }
+  .team-color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+  .team-info-block { flex: 1; }
+  .team-name-display { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 4px; }
+  .team-meta { font-size: 0.8rem; color: var(--muted); letter-spacing: 1px; }
+  .team-pts { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--red); }
+  .team-pts-label { font-size: 0.65rem; letter-spacing: 2px; color: var(--muted); text-align: right; font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; }
+
+  /* ── STANDINGS ── */
+  #standings { background: var(--black); border-top: 1px solid var(--border); }
+  .standings-table { width: 100%; border-collapse: collapse; }
+  .standings-table th { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); padding: 12px 16px; border-bottom: 2px solid var(--border); text-align: left; }
+  .standings-table td { padding: 16px; border-bottom: 1px solid var(--border); font-weight: 600; transition: background 0.2s; }
+  .standings-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .st-pos { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--muted); width: 50px; }
+  .st-pos.p1 { color: var(--gold); }
+  .st-pos.p2 { color: #c0c0c0; }
+  .st-pos.p3 { color: #cd7f32; }
+  .st-driver { display: flex; align-items: center; gap: 14px; }
+  .st-driver-img { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: var(--border); border: 2px solid var(--border); flex-shrink: 0; }
+  .st-driver-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .st-driver-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; }
+  .st-team-name { font-size: 0.75rem; color: var(--muted); }
+  .st-pts { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--red); text-align: right; }
+
+  /* ── MOST MATCHES WINNER ── */
+  #most-matches { background: linear-gradient(135deg, #0f0000 0%, var(--dark) 50%, #0f0000 100%); border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+  #most-matches::before { content: 'CHAMPIONS'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 20vw; color: rgba(225,6,0,0.04); bottom: -20px; left: 50%; transform: translateX(-50%); white-space: nowrap; pointer-events: none; }
+  .podium-wrap { display: flex; align-items: flex-end; justify-content: center; gap: 0; margin-bottom: 60px; }
+  .podium-card { background: var(--card); border: 1px solid var(--border); text-align: center; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; flex: 1; max-width: 260px; }
+  .podium-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(225,6,0,0.25); }
+  .podium-card.gold { border-color: var(--gold); order: 2; z-index: 2; transform: translateY(-20px); }
+  .podium-card.gold:hover { transform: translateY(-28px); }
+  .podium-card.silver { order: 1; }
+  .podium-card.bronze { order: 3; }
+  .podium-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .podium-card.gold::before { background: var(--gold); box-shadow: 0 0 20px rgba(245,197,24,0.5); }
+  .podium-card.silver::before { background: #c0c0c0; }
+  .podium-card.bronze::before { background: #cd7f32; }
+  .podium-badge { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
+  .gold .podium-badge { background: var(--gold); color: #000; }
+  .silver .podium-badge { background: #c0c0c0; color: #000; }
+  .bronze .podium-badge { background: #cd7f32; color: #000; }
+  .podium-photo { width: 120px; height: 120px; border-radius: 50%; margin: 30px auto 16px; overflow: hidden; background: #1a1a1a; border: 3px solid transparent; }
+  .gold .podium-photo { border-color: var(--gold); box-shadow: 0 0 30px rgba(245,197,24,0.4); }
+  .silver .podium-photo { border-color: #c0c0c0; }
+  .bronze .podium-photo { border-color: #cd7f32; }
+  .podium-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .podium-driver-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 2px; padding: 0 16px; }
+  .podium-driver-team { font-size: 0.75rem; color: var(--muted); padding: 4px 16px 12px; letter-spacing: 1px; }
+  .podium-stat { border-top: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; align-items: center; }
+  .podium-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; color: var(--red); }
+  .gold .podium-stat-num { color: var(--gold); }
+  .podium-stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .matches-runner-up { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; position: relative; z-index: 1; }
+  .runner-card { background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; gap: 14px; padding: 16px; transition: transform 0.2s, border-color 0.2s; }
+  .runner-card:hover { transform: translateX(4px); border-color: rgba(225,6,0,0.3); }
+  .runner-rank { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--border); width: 30px; text-align: center; flex-shrink: 0; }
+  .runner-photo { width: 50px; height: 50px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #1a1a1a; border: 2px solid var(--border); }
+  .runner-photo img { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .runner-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 1px; }
+  .runner-team-small { font-size: 0.75rem; color: var(--muted); }
+  .runner-wins-badge { margin-left: auto; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--red); flex-shrink: 0; }
+
+  /* ── NEWS SLIDER ── */
+  #news {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+  }
+
+  .news-slider-wrapper {
+    position: relative;
+  }
+
+  .news-slider-track-outer {
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  .news-slider-track {
+    display: flex;
+    gap: 28px;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  .news-slide-card {
+    min-width: calc(50% - 14px);
+    background: var(--card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  @media (max-width: 900px) {
+    .news-slide-card { min-width: 100%; }
+  }
+
+  .news-slide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(225,6,0,0.2);
+    border-color: rgba(225,6,0,0.3);
+  }
+
+  .news-slide-img {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a0000, #0d0d0d);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .news-slide-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+
+  .news-slide-card:hover .news-slide-img img {
+    transform: scale(1.04);
+  }
+
+  .news-slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .news-slide-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+    z-index: 2;
+  }
+
+  .news-img-placeholder {
+    font-size: 5rem;
+    opacity: 0.15;
+  }
+
+  .news-slide-body {
+    padding: 26px 28px 30px;
+    border-top: 3px solid var(--red);
+  }
+
+  .news-slide-category {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .news-slide-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.55rem;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .news-slide-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .news-slide-date {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .news-slide-read {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--muted);
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    text-transform: uppercase;
+  }
+
+  /* Controls */
+  .news-slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 32px;
+  }
+
+  .news-slider-nav {
+    display: flex;
+    gap: 12px;
+  }
+
+  .news-slider-btn {
+    width: 56px; height: 56px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    flex-shrink: 0;
+  }
+
+  .news-slider-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    box-shadow: 0 0 24px var(--red-glow);
+  }
+
+  .news-slider-dots {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: 24px;
+    flex: 1;
+  }
+
+  .news-slider-dot {
+    height: 3px;
+    width: 30px;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.2s, width 0.3s;
+    border-radius: 2px;
+  }
+
+  .news-slider-dot.active {
+    background: var(--red);
+    width: 60px;
+    box-shadow: 0 0 8px var(--red-glow);
+  }
+
+  .news-slide-counter {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .news-slide-counter span {
+    color: var(--red);
+  }
+
+  /* ── FOOTER ── */
+  footer { background: var(--dark); border-top: 2px solid var(--red); padding: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 4px; color: var(--text); }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-size: 0.8rem; color: var(--muted); letter-spacing: 1px; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 70px 20px; }
+    .podium-wrap { flex-direction: column; align-items: center; }
+    .podium-card.gold { order: 0; transform: none; }
+    .podium-card.gold:hover { transform: translateY(-8px); }
+    .podium-card { max-width: 100%; width: 100%; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 4rem; }
+    .hero-cta { flex-direction: column; align-items: center; }
+  }
+  /* SEARCH BAR */
+ .highlight-result{
+border:3px solid #e10600 !important;
+box-shadow:0 0 30px rgba(225,6,0,0.9);
+animation:glowPulse 1s infinite alternate;
+}
+
+@keyframes glowPulse{
+from{ box-shadow:0 0 10px rgba(225,6,0,0.5); }
+to{ box-shadow:0 0 35px rgba(225,6,0,1); }
+}
+.nav-search{
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.nav-search input{
+background:#111;
+border:1px solid var(--border);
+color:white;
+padding:6px 10px;
+font-family:'Rajdhani';
+}
+
+.nav-search button{
+background:var(--red);
+border:none;
+color:white;
+padding:6px 12px;
+cursor:pointer;
+}
+
+/* POPUP */
+.search-popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(8px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:2000;
+}
+
+.popup-content{
+background:#111;
+border:1px solid var(--red);
+padding:40px;
+max-width:500px;
+text-align:center;
+}
+
+.close-btn{
+position:absolute;
+top:20px;
+right:20px;
+cursor:pointer;
+font-size:20px;
+}
+#feedback{
+background:var(--dark);
+border-top:1px solid var(--border);
+text-align:center;
+}
+
+.feedback-box{
+max-width:600px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.feedback-box input,
+.feedback-box textarea{
+background:#111;
+border:1px solid var(--border);
+padding:10px;
+color:white;
+font-family:'Rajdhani';
+}
+
+.feedback-box button{
+background:var(--red);
+border:none;
+padding:12px;
+color:white;
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a href="#home" class="nav-logo">F1<span>PULSE</span></a>
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#drivers">Drivers</a></li>
+    <li><a href="#race-winners">Race Winners</a></li>
+    <li><a href="#teams">Teams</a></li>
+    <li><a href="#standings">Standings</a></li>
+    <li><a href="#most-matches">Champions</a></li>
+    <li><a href="#news">News</a></li>
+  </ul>
+  <div class="nav-search">
+  <input type="text" id="searchInput" placeholder="Search drivers, teams, races..." />
+  <button onclick="searchSite()">Search</button>
+</div>
+
+</nav>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <p class="hero-label">2025 Formula 1 World Championship</p>
+    <h1 class="hero-title">THE <span class="red">RACE</span><br>IS ON</h1>
+    <p class="hero-sub">Speed · Precision · Passion</p>
+    <div class="hero-cta">
+      <a href="#schedule" class="btn-red">View Schedule</a>
+      <a href="#standings" class="btn-outline">Standings</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── DRIVER SLIDER ── -->
+<section id="drivers">
+  <p class="section-tag">Grid 2025</p>
+  <h2 class="section-title">Featured <span class="accent">Drivers</span></h2>
+  <div class="slider-wrapper">
+    <div class="slider-track-outer">
+      <div class="slider-track" id="sliderTrack">
+        <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="maxone.jpg" alt="Max Verstappen" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=VER'" />
+            <div class="driver-number-bg">1</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">⭐ 4× World Champion</div>
+            <div class="driver-name">Max Verstappen</div>
+            <div class="driver-team">Red Bull Racing</div>
+            <div class="team-color-bar" style="background:#3671C6;"></div>
+          </div>
+        </div>
+        <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="lewisone.jpg" alt="Lewis Hamilton" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=HAM'" />
+            <div class="driver-number-bg">44</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">🏆 7× World Champion</div>
+            <div class="driver-name">Lewis Hamilton</div>
+            <div class="driver-team">Ferrari</div>
+            <div class="team-color-bar" style="background:#E8002D;"></div>
+          </div>
+        </div>
+        <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="Charles-Leclercone.jpg" alt="Charles Leclerc" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=LEC'" />
+            <div class="driver-number-bg">16</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">🔴 Pole Position King</div>
+            <div class="driver-name">Charles Leclerc</div>
+            <div class="driver-team">Ferrari</div>
+            <div class="team-color-bar" style="background:#E8002D;"></div>
+          </div>
+        </div>
+       <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="Landoone.webp" alt="Lando Norris" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=NOR'" />
+            <div class="driver-number-bg">4</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">🧡 Rising Champion</div>
+            <div class="driver-name">Lando Norris</div>
+            <div class="driver-team">McLaren</div>
+            <div class="team-color-bar" style="background:#FF8000;"></div>
+          </div>
+        </div>
+        <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="carlosone.jpg" alt="Carlos Sainz" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=SAI'" />
+            <div class="driver-number-bg">55</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">🏎 El Matador</div>
+            <div class="driver-name">Carlos Sainz</div>
+            <div class="driver-team">Williams</div>
+            <div class="team-color-bar" style="background:#64C4FF;"></div>
+          </div>
+        </div>
+       <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="georgeone.jpg" alt="George Russell" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=RUS'" />
+            <div class="driver-number-bg">63</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">⚡ Fastest Lap Leader</div>
+            <div class="driver-name">George Russell</div>
+            <div class="driver-team">Mercedes</div>
+            <div class="team-color-bar" style="background:#27F4D2;"></div>
+          </div>
+        </div>
+        <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="fernandoone.jpg" alt="Fernando Alonso" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=ALO'" />
+            <div class="driver-number-bg">14</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">🔥 The Legend</div>
+            <div class="driver-name">Fernando Alonso</div>
+            <div class="driver-team">Aston Martin</div>
+            <div class="team-color-bar" style="background:#358C75;"></div>
+          </div>
+        </div>
+        <div class="driver-card searchable">
+          <div class="driver-photo-wrap">
+            <img src="oscarone.webp" alt="Oscar Piastri" onerror="this.src='https://via.placeholder.com/260x200/1a0000/e10600?text=PIA'" />
+            <div class="driver-number-bg">81</div>
+          </div>
+          <div class="driver-info">
+            <div class="driver-caption">🌟 Future Star</div>
+            <div class="driver-name">Oscar Piastri</div>
+            <div class="driver-team">McLaren</div>
+            <div class="team-color-bar" style="background:#FF8000;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-nav">
+      <button class="slider-btn" id="prevBtn" onclick="slide(-1)">&#8592;</button>
+      <button class="slider-btn" id="nextBtn" onclick="slide(1)">&#8594;</button>
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RACE WINNERS ── -->
+<section id="race-winners">
+  <p class="section-tag">2025 Season</p>
+  <h2 class="section-title">Most Race <span class="accent">Winners</span></h2>
+  <div class="winners-grid">
+    <div class="winner-card top-1"><div class="winner-rank">#1</div><div class="winner-photo-wrap"><img src="max.png" alt="Verstappen" onerror="this.style.display='none'" /></div><div class="winner-info"><div class="winner-name">Max Verstappen</div><div class="winner-team">Red Bull Racing</div><div class="winner-wins"><span class="wins-count">12</span><span class="wins-label">Race Wins</span></div></div></div>
+    <div class="winner-card top-2"><div class="winner-rank">#2</div><div class="winner-photo-wrap"><img src="lando.jpeg" alt="Norris" onerror="this.style.display='none'" /></div><div class="winner-info"><div class="winner-name">Lando Norris</div><div class="winner-team">McLaren</div><div class="winner-wins"><span class="wins-count">7</span><span class="wins-label">Race Wins</span></div></div></div>
+    <div class="winner-card top-3"><div class="winner-rank">#3</div><div class="winner-photo-wrap"><img src="charles.png" alt="Leclerc" onerror="this.style.display='none'" /></div><div class="winner-info"><div class="winner-name">Charles Leclerc</div><div class="winner-team">Ferrari</div><div class="winner-wins"><span class="wins-count">5</span><span class="wins-label">Race Wins</span></div></div></div>
+    <div class="winner-card"><div class="winner-rank">#4</div><div class="winner-photo-wrap"><img src="oscar.jpg" alt="Piastri" onerror="this.style.display='none'" /></div><div class="winner-info"><div class="winner-name">Oscar Piastri</div><div class="winner-team">McLaren</div><div class="winner-wins"><span class="wins-count">3</span><span class="wins-label">Race Wins</span></div></div></div>
+    <div class="winner-card"><div class="winner-rank">#5</div><div class="winner-photo-wrap"><img src="lewis.png" alt="Hamilton" onerror="this.style.display='none'" /></div><div class="winner-info"><div class="winner-name">Lewis Hamilton</div><div class="winner-team">Ferrari</div><div class="winner-wins"><span class="wins-count">2</span><span class="wins-label">Race Wins</span></div></div></div>
+    <div class="winner-card"><div class="winner-rank">#6</div><div class="winner-photo-wrap"><img src="george.jpg" alt="Russell" onerror="this.style.display='none'" /></div><div class="winner-info"><div class="winner-name">George Russell</div><div class="winner-team">Mercedes</div><div class="winner-wins"><span class="wins-count">1</span><span class="wins-label">Race Win</span></div></div></div>
+  </div>
+</section>
+
+<!-- ── SCHEDULE ── -->
+<section id="schedule">
+  <p class="section-tag">Calendar 2025</p>
+  <h2 class="section-title">Race <span class="accent">Schedule</span></h2>
+  <div class="schedule-grid">
+    <div class="race-card"><div class="race-round">Round 01</div><div class="race-name">Australian Grand Prix</div><div class="race-location">📍 Melbourne, Australia</div><span class="race-date">MAR 16, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 02</div><div class="race-name">Chinese Grand Prix</div><div class="race-location">📍 Shanghai, China</div><span class="race-date">MAR 23, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 03</div><div class="race-name">Japanese Grand Prix</div><div class="race-location">📍 Suzuka, Japan</div><span class="race-date">APR 06, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 04</div><div class="race-name">Bahrain Grand Prix</div><div class="race-location">📍 Sakhir, Bahrain</div><span class="race-date">APR 13, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 05</div><div class="race-name">Saudi Arabian Grand Prix</div><div class="race-location">📍 Jeddah, Saudi Arabia</div><span class="race-date">APR 20, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 06</div><div class="race-name">Miami Grand Prix</div><div class="race-location">📍 Miami, USA</div><span class="race-date">MAY 04, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 07</div><div class="race-name">Emilia Romagna Grand Prix</div><div class="race-location">📍 Imola, Italy</div><span class="race-date">MAY 18, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 08</div><div class="race-name">Monaco Grand Prix</div><div class="race-location">📍 Monte Carlo, Monaco</div><span class="race-date">MAY 25, 2025</span></div>
+    <div class="race-card"><div class="race-round">Round 09</div><div class="race-name">Spanish Grand Prix</div><div class="race-location">📍 Barcelona, Spain</div><span class="race-date">JUN 01, 2025</span></div>
+  </div>
+</section>
+
+<!-- ── TEAMS ── -->
+<section id="teams">
+  <p class="section-tag">Constructors 2025</p>
+  <h2 class="section-title">F1 <span class="accent">Teams</span></h2>
+  <div class="teams-grid">
+   <div class="team-card searchable"><div class="team-color-dot" style="background:#3671C6;"></div><div class="team-info-block"><div class="team-name-display">Red Bull Racing</div><div class="team-meta">Honda RBPT · Austria</div></div><div><div class="team-pts">756</div><div class="team-pts-label">PTS</div></div></div>
+    <div class="team-card searchable"><div class="team-color-dot" style="background:#FF8000;"></div><div class="team-info-block"><div class="team-name-display">McLaren</div><div class="team-meta">Mercedes · UK</div></div><div><div class="team-pts">593</div><div class="team-pts-label">PTS</div></div></div>
+    <div class="team-card searchable"><div class="team-color-dot" style="background:#E8002D;"></div><div class="team-info-block"><div class="team-name-display">Ferrari</div><div class="team-meta">Ferrari · Italy</div></div><div><div class="team-pts">557</div><div class="team-pts-label">PTS</div></div></div>
+    <div class="team-card searchable"><div class="team-color-dot" style="background:#27F4D2;"></div><div class="team-info-block"><div class="team-name-display">Mercedes</div><div class="team-meta">Mercedes · UK</div></div><div><div class="team-pts">468</div><div class="team-pts-label">PTS</div></div></div>
+    <div class="team-card searchable"><div class="team-color-dot" style="background:#358C75;"></div><div class="team-info-block"><div class="team-name-display">Aston Martin</div><div class="team-meta">Mercedes · UK</div></div><div><div class="team-pts">94</div><div class="team-pts-label">PTS</div></div></div>
+    <div class="team-card searchable"><div class="team-color-dot" style="background:#0093CC;"></div><div class="team-info-block"><div class="team-name-display">Alpine</div><div class="team-meta">Renault · France</div></div><div><div class="team-pts">65</div><div class="team-pts-label">PTS</div></div></div>
+    <div class="team-card searchable"><div class="team-color-dot" style="background:#64C4FF;"></div><div class="team-info-block"><div class="team-name-display">Williams</div><div class="team-meta">Mercedes · UK</div></div><div><div class="team-pts">51</div><div class="team-pts-label">PTS</div></div></div>
+    <div class="team-card searchable"><div class="team-color-dot" style="background:#B6BABD;"></div><div class="team-info-block"><div class="team-name-display">Haas</div><div class="team-meta">Ferrari · USA</div></div><div><div class="team-pts">50</div><div class="team-pts-label">PTS</div></div></div>
+  </div>
+</section>
+
+<!-- ── STANDINGS ── -->
+<section id="standings">
+  <p class="section-tag">Championship</p>
+  <h2 class="section-title">Driver <span class="accent">Standings</span></h2>
+  <table class="standings-table">
+    <thead>
+      <tr>
+        <th>POS</th>
+        <th>DRIVER</th>
+        <th>TEAM</th>
+        <th style="text-align:right;">PTS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="st-pos p1">1</td><td><div class="st-driver"><div class="st-driver-img"><img src="max.png" alt="VER" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">MAX VERSTAPPEN</div><div class="st-team-name">Red Bull Racing</div></div></div></td><td style="color:var(--muted)">Red Bull Racing</td><td class="st-pts">437</td></tr>
+      <tr><td class="st-pos p2">2</td><td><div class="st-driver"><div class="st-driver-img"><img src="lando.jpeg" alt="NOR" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">LANDO NORRIS</div><div class="st-team-name">McLaren</div></div></div></td><td style="color:var(--muted)">McLaren</td><td class="st-pts">374</td></tr>
+      <tr><td class="st-pos p3">3</td><td><div class="st-driver"><div class="st-driver-img"><img src="charles.png" alt="LEC" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">CHARLES LECLERC</div><div class="st-team-name">Ferrari</div></div></div></td><td style="color:var(--muted)">Ferrari</td><td class="st-pts">356</td></tr>
+      <tr><td class="st-pos">4</td><td><div class="st-driver"><div class="st-driver-img"><img src="oscar.jpg" alt="PIA" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">OSCAR PIASTRI</div><div class="st-team-name">McLaren</div></div></div></td><td style="color:var(--muted)">McLaren</td><td class="st-pts">292</td></tr>
+      <tr><td class="st-pos">5</td><td><div class="st-driver"><div class="st-driver-img"><img src="lewis.png" alt="HAM" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">LEWIS HAMILTON</div><div class="st-team-name">Ferrari</div></div></div></td><td style="color:var(--muted)">Ferrari</td><td class="st-pts">211</td></tr>
+      <tr><td class="st-pos">6</td><td><div class="st-driver"><div class="st-driver-img"><img src="george.jpg" alt="RUS" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">GEORGE RUSSELL</div><div class="st-team-name">Mercedes</div></div></div></td><td style="color:var(--muted)">Mercedes</td><td class="st-pts">192</td></tr>
+      <tr><td class="st-pos">7</td><td><div class="st-driver"><div class="st-driver-img"><img src="carlos.jpg" alt="SAI" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">CARLOS SAINZ</div><div class="st-team-name">Williams</div></div></div></td><td style="color:var(--muted)">Williams</td><td class="st-pts">172</td></tr>
+      <tr><td class="st-pos">8</td><td><div class="st-driver"><div class="st-driver-img"><img src="fernando.jpeg" alt="ALO" onerror="this.style.display='none'"/></div><div><div class="st-driver-name">FERNANDO ALONSO</div><div class="st-team-name">Aston Martin</div></div></div></td><td style="color:var(--muted)">Aston Martin</td><td class="st-pts">68</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── MOST MATCHES WINNER ── -->
+<section id="most-matches">
+  <p class="section-tag">All-Time Records</p>
+  <h2 class="section-title">Most Matches <span class="accent">Winner</span></h2>
+  <div class="podium-wrap">
+    <div class="podium-card silver"><div class="podium-badge">2</div><div class="podium-photo"><img src="lando.jpeg" alt="Norris" onerror="this.style.display='none'" /></div><div class="podium-driver-name">Lando Norris</div><div class="podium-driver-team">McLaren · UK</div><div class="podium-stat"><div class="podium-stat-num">374</div><div class="podium-stat-label">Points · 7 Wins</div></div></div>
+    <div class="podium-card gold"><div class="podium-badge">1</div><div class="podium-photo"><img src="max.png" alt="Verstappen" onerror="this.style.display='none'" /></div><div class="podium-driver-name">Max Verstappen</div><div class="podium-driver-team">Red Bull Racing · NL</div><div class="podium-stat"><div class="podium-stat-num">437</div><div class="podium-stat-label">Points · 12 Wins</div></div></div>
+    <div class="podium-card bronze"><div class="podium-badge">3</div><div class="podium-photo"><img src="charles.png" alt="Leclerc" onerror="this.style.display='none'" /></div><div class="podium-driver-name">Charles Leclerc</div><div class="podium-driver-team">Ferrari · Monaco</div><div class="podium-stat"><div class="podium-stat-num">356</div><div class="podium-stat-label">Points · 5 Wins</div></div></div>
+  </div>
+  <div class="matches-runner-up">
+    <div class="runner-card"><div class="runner-rank">4</div><div class="runner-photo"><img src="oscar.jpg" alt="PIA" onerror="this.style.display='none'"/></div><div><div class="runner-name">Oscar Piastri</div><div class="runner-team-small">McLaren</div></div><div class="runner-wins-badge">3W</div></div>
+    <div class="runner-card"><div class="runner-rank">5</div><div class="runner-photo"><img src="lewis.png" alt="HAM" onerror="this.style.display='none'"/></div><div><div class="runner-name">Lewis Hamilton</div><div class="runner-team-small">Ferrari</div></div><div class="runner-wins-badge">2W</div></div>
+    <div class="runner-card"><div class="runner-rank">6</div><div class="runner-photo"><img src="george.jpg" alt="RUS" onerror="this.style.display='none'"/></div><div><div class="runner-name">George Russell</div><div class="runner-team-small">Mercedes</div></div><div class="runner-wins-badge">1W</div></div>
+    <div class="runner-card"><div class="runner-rank">7</div><div class="runner-photo"><img src="carlos.jpg" alt="SAI" onerror="this.style.display='none'"/></div><div><div class="runner-name">Carlos Sainz</div><div class="runner-team-small">Williams</div></div><div class="runner-wins-badge">0W</div></div>
+  </div>
+</section>
+
+<!-- ── NEWS SLIDER ── -->
+<section id="news">
+  <p class="section-tag">Latest Updates</p>
+  <h2 class="section-title">F1 <span class="accent">News</span></h2>
+
+  <div class="news-slider-wrapper">
+    <div class="news-slider-track-outer">
+      <div class="news-slider-track" id="newsSliderTrack">
+
+        <!-- CARD 1 -->
+        <div class="news-slide-card searchable">
+          <div class="news-slide-img">
+            <img src="news1.avif" alt="Verstappen Bahrain Win" />
+            <div class="news-slide-overlay"></div>
+            <div class="news-slide-badge">Championship</div>
+          </div>
+          <div class="news-slide-body">
+            <div class="news-slide-category">Championship</div>
+            <div class="news-slide-headline">Verstappen Extends Title Lead After Dominant Bahrain Performance</div>
+            <div class="news-slide-meta">
+              <span class="news-slide-date">APR 14, 2025</span>
+              <span class="news-slide-read">4 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="news-slide-card searchable">
+          <div class="news-slide-img">
+            <img src="news2.avif" alt="Ferrari Upgrade" />
+            <div class="news-slide-overlay"></div>
+            <div class="news-slide-badge">Technical</div>
+          </div>
+          <div class="news-slide-body">
+            <div class="news-slide-category">Technical</div>
+            <div class="news-slide-headline">Ferrari Unveils Major Upgrade Package for European Swing</div>
+            <div class="news-slide-meta">
+              <span class="news-slide-date">APR 10, 2025</span>
+              <span class="news-slide-read">3 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="news-slide-card searchable">
+          <div class="news-slide-img">
+            <img src="news3.jpg" alt="Hamilton Ferrari" />
+            <div class="news-slide-overlay"></div>
+            <div class="news-slide-badge">Transfer</div>
+          </div>
+          <div class="news-slide-body">
+            <div class="news-slide-category">Transfer</div>
+            <div class="news-slide-headline">Hamilton Settles Into Ferrari — First Impressions from the Paddock</div>
+            <div class="news-slide-meta">
+              <span class="news-slide-date">MAR 18, 2025</span>
+              <span class="news-slide-read">5 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="news-slide-card searchable">
+          <div class="news-slide-img">
+            <img src="news4.jpg" alt="McLaren Double Podium in Monaco Shakes Up Constructors Standings" />
+            <div class="news-slide-overlay"></div>
+            <div class="news-slide-badge">Race Report</div>
+          </div>
+          <div class="news-slide-body">
+            <div class="news-slide-category">Race Report</div>
+            <div class="news-slide-headline">McLaren's Double Podium in Monaco Shakes Up Constructor Standings</div>
+            <div class="news-slide-meta">
+              <span class="news-slide-date">MAY 26, 2025</span>
+              <span class="news-slide-read">6 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="news-slide-card searchable">
+           <div class="news-slide-img">
+            <img src="news55.jpg" alt="Red Bull Responds to FIA Scrutiny Over Flexible Front Wing Design" />
+            <div class="news-slide-overlay"></div>
+            <div class="news-slide-badge">Technology</div>
+          </div>
+          <div class="news-slide-body">
+            <div class="news-slide-category">Technology</div>
+            <div class="news-slide-headline">Red Bull Responds to FIA Scrutiny Over Flexible Front Wing Design</div>
+            <div class="news-slide-meta">
+              <span class="news-slide-date">MAY 20, 2025</span>
+              <span class="news-slide-read">4 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="news-slide-card searchable">
+         <div class="news-slide-img">
+            <img src="news6.jpg" alt="Norris vs Verstappen: The Title Battle That's Captivating the World" />
+            <div class="news-slide-overlay"></div>
+            <div class="news-slide-badge">Feature</div>
+          </div>
+          <div class="news-slide-body">
+            <div class="news-slide-category">Feature</div>
+            <div class="news-slide-headline">Norris vs Verstappen: The Title Battle That's Captivating the World</div>
+            <div class="news-slide-meta">
+              <span class="news-slide-date">MAY 15, 2025</span>
+              <span class="news-slide-read">8 min read</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="news-slider-controls">
+      <div class="news-slider-nav">
+        <button class="news-slider-btn" onclick="slideNews(-1)">&#8592;</button>
+        <button class="news-slider-btn" onclick="slideNews(1)">&#8594;</button>
+      </div>
+      <div class="news-slider-dots" id="newsSliderDots"></div>
+      <div class="news-slide-counter" id="newsCounter"><span>01</span> / 03</div>
+    </div>
+  </div>
+</section>
+<div id="searchPopup" class="search-popup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePopup()">✖</span>
+    <h2 id="popupTitle"></h2>
+    <p id="popupText"></p>
+  </div>
+</div>
+<section id="feedback">
+<p class="section-tag">User Response</p>
+<h2 class="section-title">Send <span class="accent">Feedback</span></h2>
+
+<div class="feedback-box">
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Email">
+<textarea placeholder="Your feedback"></textarea>
+<button onclick="submitFeedback()">Submit</button>
+</div>
+
+</section>
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">F1<span>PULSE</span></div>
+  <div class="footer-copy">© 2025 F1 Pulse · All Rights Reserved · Formula One World Championship</div>
+</footer>
+
+<script>
+  // ── DRIVER SLIDER ──
+  const track = document.getElementById('sliderTrack');
+  const cards = track.querySelectorAll('.driver-card');
+  const dotsContainer = document.getElementById('sliderDots');
+  let current = 0;
+
+  function getVisibleCount() {
+    return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : window.innerWidth < 1200 ? 3 : 4;
+  }
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    const vc = getVisibleCount();
+    const total = Math.ceil(cards.length / vc);
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'slider-dot' + (i === current ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function goTo(idx) {
+    const vc = getVisibleCount();
+    const maxSlide = Math.ceil(cards.length / vc) - 1;
+    current = Math.max(0, Math.min(idx, maxSlide));
+    const cardWidth = cards[0].offsetWidth + 24;
+    track.style.transform = `translateX(-${current * vc * cardWidth}px)`;
+    dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function slide(dir) { goTo(current + dir); }
+  window.slide = slide;
+  buildDots();
+  window.addEventListener('resize', () => { current = 0; track.style.transform = 'translateX(0)'; buildDots(); });
+
+  // ── NEWS SLIDER ──
+  const newsTrack = document.getElementById('newsSliderTrack');
+  const newsCards = newsTrack.querySelectorAll('.news-slide-card');
+  const newsDotsContainer = document.getElementById('newsSliderDots');
+  const newsCounter = document.getElementById('newsCounter');
+  let newsCurrent = 0;
+
+  function getNewsVisible() {
+    return window.innerWidth < 900 ? 1 : 2;
+  }
+
+  function getTotalNewsSlides() {
+    return Math.ceil(newsCards.length / getNewsVisible());
+  }
+
+  function buildNewsDots() {
+    newsDotsContainer.innerHTML = '';
+    const total = getTotalNewsSlides();
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'news-slider-dot' + (i === newsCurrent ? ' active' : '');
+      dot.addEventListener('click', () => goToNews(i));
+      newsDotsContainer.appendChild(dot);
+    }
+    updateNewsCounter();
+  }
+
+  function updateNewsCounter() {
+    const total = getTotalNewsSlides();
+    const cur = String(newsCurrent + 1).padStart(2, '0');
+    const tot = String(total).padStart(2, '0');
+    newsCounter.innerHTML = `<span>${cur}</span> / ${tot}`;
+  }
+
+  function goToNews(idx) {
+    const nv = getNewsVisible();
+    const maxSlide = getTotalNewsSlides() - 1;
+    newsCurrent = Math.max(0, Math.min(idx, maxSlide));
+    const cardWidth = newsCards[0].offsetWidth + 28;
+    newsTrack.style.transform = `translateX(-${newsCurrent * nv * cardWidth}px)`;
+    newsDotsContainer.querySelectorAll('.news-slider-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === newsCurrent);
+    });
+    updateNewsCounter();
+  }
+
+  function slideNews(dir) { goToNews(newsCurrent + dir); }
+  window.slideNews = slideNews;
+  buildNewsDots();
+  window.addEventListener('resize', () => { newsCurrent = 0; newsTrack.style.transform = 'translateX(0)'; buildNewsDots(); });
+
+  // ── NAVBAR ACTIVE SCROLL ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+  function searchSite(){
+
+let query = document.getElementById("searchInput").value.toLowerCase().trim()
+
+// search priority order
+let groups = [
+document.querySelectorAll("#teams .searchable"),
+document.querySelectorAll("#drivers .searchable"),
+document.querySelectorAll("#race-winners .winner-card"),
+document.querySelectorAll("#news .searchable")
+]
+
+let found = false
+
+groups.forEach(group=>{
+group.forEach(card=>{
+card.classList.remove("highlight-result")
+
+let text = card.innerText.toLowerCase()
+
+if(!found && text.includes(query) && query !== ""){
+card.classList.add("highlight-result")
+
+card.scrollIntoView({
+behavior:"smooth",
+block:"center"
+})
+
+found = true
+}
+})
+})
+
+}
+function closePopup(){
+document.getElementById("searchPopup").style.display="none"
+}
+
+function submitFeedback(){
+alert("Thank you for your feedback!")
+}
+</script>
+</body>
+</html>

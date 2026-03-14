@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jasmitha Portfolio</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #000205, #010204);
+            color: white;
+            text-align: center;
+        }
+
+        /* HEADER */
+        .header-section {
+            padding: 50px 20px 30px 20px;
+            background: linear-gradient(to right, #0a1440, #111a4d);
+        }
+
+        .social-block {
+            margin-top: 25px;
+            padding: 12px 30px;
+            display: inline-flex;
+            gap: 30px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 40px;
+        }
+
+        .social-block a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .social-block a:hover {
+            color: #4da6ff;
+        }
+
+        /* HERO (UNCHANGED) */
+        .hero {
+            position: relative;
+            height: 100vh;
+        }
+
+        .hero-img {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1100px;
+            max-width: 92%;
+        }
+
+        /* FLOATING BUTTONS (UNCHANGED + BOUNCE KEPT) */
+        .card {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        .card:hover {
+            background: linear-gradient(135deg, #2a6cff, #4da6ff);
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* BUTTON POSITIONS (UNCHANGED) */
+        .about { top: 20%; left: 28%; }
+        .skills { top: 49%; left: 25%; }
+        .hobby { top: 77%; left: 28%; }
+
+        .education { top: 20%; right: 28%; }
+        .projects { top: 49%; right: 25%; }
+        .contact { top: 77%; right: 28%; }
+
+        .techevents {
+            top: 4%;
+            left: 46%;
+            transform: translateX(-50%);
+        }
+
+        .certificates {
+            top: 89%;
+            left: 46%;
+            transform: translateX(-50%);
+        }
+
+        /* COMMON SECTION STYLE */
+        .section-box {
+            margin: 80px auto;
+            padding: 60px;
+            width: 85%;
+            max-width: 1100px;
+            background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+            border-radius: 20px;
+        }
+
+        /* 🔥 ONLY ABOUT FIX */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .profile {
+            width: 300px;
+            text-align: center;
+        }
+
+        .profile img {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4da6ff;
+        }
+
+        .profile p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #4da6ff;
+        }
+
+        .about-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .gallery img {
+            width: 250px;
+            margin: 15px;
+            border-radius: 10px;
+        }
+        .edu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.edu-card {
+    width: 260px;
+    padding: 30px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+    text-align: center;
+    transition: 0.4s ease;
+    opacity: 0.6;
+    transform: scale(0.9);
+}
+
+.edu-card img {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+/* Default middle highlighted */
+.edu-card.active {
+    transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 0 30px rgba(77,166,255,0.6);
+}
+
+/* Hover effect */
+.edu-card:hover {
+    transform: scale(1.15);
+    opacity: 1;
+    box-shadow: 0 0 35px rgba(77,166,255,0.8);
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.skill-card {
+    padding: 30px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #11152c, #1a1f3d);
+    text-align: center;
+    transition: 0.4s ease;
+    border: 1px solid #2a2f5c;
+}
+
+.skill-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.skill-card h3 {
+    margin: 10px 0 0 0;
+    font-size: 18px;
+    color: #4da6ff;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(77,166,255,0.5);
+}
+/* HOBBY GRID */
+.hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    .hobby-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.hobby-card {
+    padding: 35px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #0f1226, #1a1f3d);
+    text-align: left;
+    transition: 0.4s ease;
+    border: 1px solid rgba(77,166,255,0.2);
+    position: relative;
+}
+
+.hobby-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(77,166,255,0.3);
+}
+
+.hobby-icon {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.hobby-card h3 {
+    margin: 0 0 10px 0;
+    color: #4da6ff;
+}
+
+.hobby-card p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+.slider {
+    position: relative;
+    max-width: 900px;
+    margin: 50px auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    transition: transform 0.6s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.slide-card {
+    background: linear-gradient(145deg, #11152c, #1a1f3d);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.slide-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: contain;
+    background: black;
+    border-radius: 15px;
+}
+
+/* arrows */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0f0c29;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+/* CERTIFICATE SCROLL */
+.cert-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 30px 10px;
+    scroll-behavior: smooth;
+}
+
+.cert-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cert-scroll::-webkit-scrollbar-thumb {
+    background: #4da6ff;
+    border-radius: 10px;
+}
+
+.cert-card {
+    min-width: 280px;
+    background: linear-gradient(145deg, #11152c, #1a1f3d);
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.cert-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.cert-card p {
+    font-size: 14px;
+    color: #4da6ff;
+}
+
+.cert-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(77,166,255,0.6);
+}
+.contact-text {
+    max-width: 600px;
+    margin: 20px auto 40px auto;
+    font-size: 15px;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-btn {
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #2a6cff, #4da6ff);
+    transition: 0.3s ease;
+}
+
+.contact-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(77,166,255,0.7);
+}
+/* CLEAN ENDING FOOTER */
+.footer {
+    background: linear-gradient(to right, #000814, #001d3d, #000814);
+    text-align: center;
+
+    padding: 50px 20px;   /* reduced */
+    margin-top: 80px;     /* small gap from above */
+}
+
+/* Main Line */
+.footer-message {
+    font-size: 32px;
+    font-weight: 600;
+    color: #4da6ff;
+    margin-bottom: 15px;
+
+    animation: fadeUp 1.2s ease;
+}
+
+/* Sub Line */
+.footer-sub {
+    font-size: 15px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+/* Divider */
+.footer-divider {
+    width: 60px;
+    height: 3px;
+    background: #4da6ff;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+
+/* Copyright */
+.footer-copy {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-top: 20px;
+}
+
+/* Animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* PROJECTS GRID */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.project-card {
+    padding: 35px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #11152c, #1a1f3d);
+    text-align: left;
+    transition: 0.4s ease;
+    border: 1px solid rgba(77,166,255,0.2);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(77,166,255,0.4);
+}
+
+.project-card h3 {
+    color: #4da6ff;
+}
+
+.project-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    background: linear-gradient(135deg,#2a6cff,#4da6ff);
+    color: white;
+    font-weight: 600;
+}
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header-section">
+    <h1>Jasmitha Portfolio</h1>
+    <p>Aspiring AI/ML Engineer • Creative Developer • Problem Solver</p>
+
+<div class="social-block">
+    <a href="https://github.com/jasmithakuppala-hash" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/jasmitha-kuppala-2403b4372/" target="_blank">LinkedIn</a>
+    <a href="https://www.codechef.com/users/jasmitha_056" target="_blank">CodeChef</a>
+    <a href="https://www.hackerrank.com/profile/jasmitha_056" target="_blank">HackerRank</a>
+    <a href="https://codolio.com/profile/jasmitha_056" target="_blank">Codolio</a>
+</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <img src="portfolio/fl.png" class="hero-img">
+
+    <a href="#about" class="card about">About</a>
+    <a href="#skills" class="card skills">Skills</a>
+    <a href="#hobby" class="card hobby">Hobby</a>
+
+    <a href="#education" class="card education">Education</a>
+    <a href="#projects" class="card projects">Projects</a>
+    <a href="#contact" class="card contact">Contact</a>
+
+    <a href="#techevents" class="card techevents">TechEvents</a>
+    <a href="#certificates" class="card certificates">Certificates</a>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section-box">
+    <div class="about-container">
+
+        <div class="profile">
+            <img src="portfolio/myimg.jpeg">
+            <p>Kuppala Jasmitha</p>
+        </div>
+
+        <div class="about-text">
+            <h2>About Me</h2>
+            <p>
+                I am a passionate Computer Science student with a strong interest 
+                in Artificial Intelligence and Machine Learning. I enjoy solving 
+                real-world problems through technology and continuously improving 
+                my technical skills.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- OTHER SECTIONS (UNCHANGED) -->
+
+<section id="education" class="section-box">
+
+    <h2>Education</h2>
+
+    <div class="edu-container">
+
+        <div class="edu-card">
+            <img src="portfolio/gms.png">
+            <h3>Gowtham Model School</h3>
+            <p>10th Grade</p>
+            <p><strong>CGPA: 10.0</strong></p>
+        </div>
+
+        <div class="edu-card active">
+            <img src="portfolio/clg.png">
+            <h3>Sri Chaitanya Junior College</h3>
+            <p>Intermediate (MPC)</p>
+            <p><strong>986 / 1000</strong></p>
+        </div>
+
+        <div class="edu-card">
+            <img src="portfolio/uni.jpg">
+            <h3>KLH University</h3>
+            <p>B.Tech CSE</p>
+            <p><strong>Currently Pursuing</strong></p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="skills" class="section-box">
+    <h2>Skills</h2>
+
+    <div class="skills-grid">
+
+        <div class="skill-card">
+            <img src="portfolio/c.png" class="skill-img">
+            <h3>C Programming</h3>
+        </div>
+
+        <div class="skill-card">
+            <img src="portfolio/java.svg" class="skill-img">
+            <h3>Java</h3>
+        </div>
+
+        <div class="skill-card">
+            <img src="portfolio/dsa.png" class="skill-img">
+            <h3>Data Structures</h3>
+        </div>
+
+      <a href="htmlprojects/index.html" style="text-decoration:none;">
+            <div class="skill-card">
+                <img src="portfolio/hc.png" class="skill-img">
+                <h3>HTML + CSS</h3>
+            </div>
+        </a>
+
+        <a href="js/index.html" style="text-decoration:none;">
+    <div class="skill-card">
+        <img src="portfolio/js.webp" class="skill-img">
+        <h3>JavaScript</h3>
+    </div>
+</a>
+
+    </div>
+</section>
+
+
+<section id="projects" class="section-box">
+
+<h2>My Projects</h2>
+
+<div class="project-grid">
+
+    <!-- DTI PROJECT -->
+    <div class="project-card">
+        <h3>DTI Data Analysis Project</h3>
+        <p>
+            A data-driven project focused on analyzing datasets,
+            extracting insights and applying analytical techniques
+            to understand patterns and trends.
+        </p>
+        <a href="https://nut-caro-copy-fba44a87.base44.app" target="_blank" 
+   style="display:inline-block; padding:15px 30px; border-radius:30px; 
+   text-decoration:none; font-weight:600; color:white; 
+   background: linear-gradient(135deg, #2a6cff, #4da6ff); 
+   transition:0.3s ease;">
+   🚀 View My Project App
+</a>
+    </div>
+
+    <!-- FRONTEND PROJECT -->
+    <div class="project-card">
+        <h3>Frontend Web Development Project</h3>
+        <p>
+            A responsive web application built using HTML, CSS and
+            JavaScript focusing on UI design, user interaction and
+            modern frontend practices.
+        </p>
+
+        <a href="projects/main/index.html" target="_blank" class="project-btn">
+            View Project Website!
+        </a>
+    </div>
+
+</div>
+
+</section>
+<section id="hobby" class="section-box">
+    <h2>Hobbies & Interests</h2>
+
+    <div class="hobby-grid">
+
+        <div class="hobby-card">
+            <div class="hobby-icon">🎨</div>
+            <h3>Creative Drawing</h3>
+            <p>
+                I enjoy expressing ideas visually through drawing. 
+                It strengthens my creativity and influences my approach 
+                to UI design and visual thinking.
+            </p>
+        </div>
+
+        <div class="hobby-card">
+            <div class="hobby-icon">🌍</div>
+            <h3>Global Awareness</h3>
+            <p>
+                I stay informed about world events, technology trends, 
+                and public policy discussions to better understand how 
+                systems function beyond just technical fields.
+            </p>
+        </div>
+
+        <div class="hobby-card">
+            <div class="hobby-icon">🧠</div>
+            <h3>Coding Challenges</h3>
+            <p>
+                Solving logical and algorithmic problems helps me sharpen 
+                analytical thinking and improve my programming skills.
+            </p>
+        </div>
+
+        <div class="hobby-card">
+            <div class="hobby-icon">🏆</div>
+            <h3>Tech Events</h3>
+            <p>
+                Participating in hackathons and technical events allows 
+                me to collaborate, innovate and apply concepts practically.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section id="techevents" class="section-box">
+    <h2>Tech Events & Leadership</h2>
+
+    <div class="slider">
+        <div class="slides" id="slides">
+
+            <div class="slide">
+                <div class="slide-card">
+                    <img src="portfolio/mic.jpeg">
+                    <h3>Microsoft Launchpad</h3>
+                    <p>Insights into innovation and global tech trends.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="slide-card">
+                    <img src="portfolio/dev.jpeg">
+                    <h3>DevOps & Ethical Hacking</h3>
+                    <p>Explored cybersecurity and deployment practices.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="slide-card">
+                    <img src="portfolio/con.jpeg">
+                    <h3>Startup Panel Discussion</h3>
+                    <p>Learned from entrepreneurs and industry leaders.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="slide-card">
+                    <img src="portfolio/ser.jpeg">
+                    <h3>NSS Career Guidance</h3>
+                    <p>Guided students about technology careers.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="slide-card">
+                    <img src="portfolio/hack.jpeg">
+                    <h3>Hackathon Winner 🏆</h3>
+                    <p>Led a team and secured first prize in first Datathon.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="prev" onclick="moveSlide(-1)">❮</button>
+        <button class="next" onclick="moveSlide(1)">❯</button>
+    </div>
+</section>
+
+
+
+<section id="certificates" class="section-box">
+    <h2>Certificates & Achievements</h2>
+
+    <div class="cert-scroll">
+
+        <div class="cert-card">
+            <img src="portfolio/mcert.jpeg">
+            <p>Microsoft Launchpad Certificate</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="portfolio/code.jpeg">
+            <p>CodeChef 500 difficulty level</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="portfolio/hcert.jpeg">
+            <p>Hackathon Winner Certificate</p>
+        </div>
+        <div class="cert-card">
+            <img src="portfolio/mgoddies.jpeg">
+            <p>Event Swag Collection 🎁</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="portfolio/hgoodies.jpeg">
+            <p>Hackathon Goodies 🏆</p>
+        </div>
+
+    </div>
+</section>
+<section id="contact" class="section-box">
+    <h2>Let’s Connect</h2>
+
+    <p class="contact-text">
+        I’m currently exploring opportunities to learn, build and grow in the tech field.
+        If you’d like to collaborate or discuss ideas, feel free to reach out.
+    </p>
+
+    <div class="contact-buttons">
+        <a href="mailto:kuppala.jasmitha@klh.edu.in" class="contact-btn">📩 Email Me</a>
+    </div>
+</section>
+<footer class="footer">
+
+    <div class="footer-message">
+        Let’s build something meaningful.
+    </div>
+
+    <div class="footer-sub">
+        Open to collaborations, internships and innovative projects.
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-copy">
+        © 2026 Kuppala Jasmitha • Designed & Developed by Me
+    </div>
+
+</footer>
+<script>
+let index = 0;
+
+function moveSlide(step) {
+    const slides = document.getElementById("slides");
+    const total = slides.children.length;
+
+    index += step;
+
+    if (index >= total) index = 0;
+    if (index < 0) index = total - 1;
+
+    slides.style.transform = "translateX(" + (-index * 100) + "%)";
+}
+</script>
+</body>
+</html>
