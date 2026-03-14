@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Passport Application Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Passport Application Form</h2>
+    <form>
+        <fieldset>
+            <legend>Personal Details</legend>
+            <label>Full Name </label>
+            <input type="text" required autofocus placeholder="Enter your full name">
+            <label>Date of Birth</label>
+            <input type="date">
+            <label>Gender</label>
+            <br><input type="radio" name="gender">Male
+            <input type="radio" name="gender">Female
+            <input type="radio" name="gender">Other
+            <br><label>Marital Status</label>
+            <select>
+               <option name="">Select</option>
+               <option>Married</option>
+               <option>Unmarried</option>
+               <option>Divorced</option>
+               <option>Seperated</option>
+               <option>Widowed</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Contact Details</legend>
+            <label>Email</label>
+            <input type="email">
+            <label>Mobile Number</label>
+            <input type="tel" pattern="[0-9]{10}">
+            <label>Address</label>
+            <textarea rows="5"></textarea>
+        </fieldset>
+        <fieldset>
+            <legend>Passport Details</legend>
+             <label>Type of Application</label>
+            <br> <input type="radio" name="gender" >New Passport
+             <input type="radio" name="gender">Reissue
+             <br><label>Passport Booklet Type</label>
+             <br><input type="checkbox">36 Pages
+             <input type="checkbox">60 Pages
+             <br><label>upload Proof</label>
+             <input type="file">
+        </fieldset>
+        <fieldset>
+            <legend>Declaration</legend>
+            <input type="checkbox"> I hereby declare that the information given is true.
+        </fieldset>
+        <button>Submit</button>
+        <button>Clear</button>
+    </form>
+</body>
+</html>

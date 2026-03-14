@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+        .main-heading{
+            background: linear-gradient(to top,rgb(141, 187, 34),rgb(253, 253, 18))
+        }
+    </style>
+</head>
+<body>
+<script>
+    //h1 element
+    let h1=document.createElement("h1");
+    h1.textContent="Introduction to JavaScript";
+    h1.classList.add("main-heading");
+    h1.setAttribute("id","head");//(or) h1.id="head";
+    document.body.appendChild(h1);
+    //p element
+    let p=document.createElement("p");
+    p.textContent="This is an exapmle to show Dom manipulation";
+    document.body.appendChild(p);
+    //button element
+    let button=document.createElement("button");
+    button.textContent="Get Started";
+    document.body.appendChild(button);
+    //button click using addEventlistener
+    button.addEventListener("mouseover",function(){
+      h1.style.color="green";
+      p.style.color="red";
+      button.style.backgroundColor="blue";
+      document.body.style.backgroundColor="orange";
+    })
+</script>
+</body>
+</html>

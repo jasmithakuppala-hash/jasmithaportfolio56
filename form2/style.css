@@ -1,0 +1,46 @@
+form{
+    width:500px;
+    padding:25px;
+    margin:auto;
+    border-radius: 25px;
+    box-shadow: 5px 5px 15px rgb(36, 37, 37);
+    background-color: white;
+}
+body{
+    font-family: Roboto;
+    background-color: rgb(236, 244, 255);
+}
+h2{
+    color: #003366;
+    text-align: center;
+}
+input[type="radio"],input[type="checkbox"]{
+    width:auto;
+}
+label{
+    font-weight: bold;
+}
+input,select,textarea{
+    margin: 5px;
+    padding:5px;
+    width:100%;
+}
+legend{
+    color:#0b12ce;
+
+}
+button{
+    background-color: rgb(64, 64, 240);
+    width: 100px;
+    margin-right: px;
+    align-content: center;
+    margin-top: 8px;
+    margin-left: 87px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height:25px;
+}
+fieldset{
+    border-radius: 5px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=[10,20,"name",12.30];
+        console.log(a);
+        a.forEach(function(item,index){
+         console.log(item+ " :"+index);
+        })
+        //list.forEach((item)=>{console.log(item)})
+        //list.forEach((item,index)=>{console.log(index+":"+item);});
+        let fruits=["apple","banana","orange","grapes"];
+        fruits.forEach((fruit)=>{console.log(fruit)});
+        function message(){
+            console.log("Welcome");
+        }
+        message();
+        function add(a,b){
+            return a+b;
+        }
+        let result = add(10,20);
+        console.log(add(30,50));
+        console.log(result);
+        //arrow function
+        const multiply=(a,b) =>{
+            return a*b;
+        }
+        console.log(multiply(20,30));
+        //arrow function without argumnets
+        let greet=()=>{
+            console.log("Hi, Good Morning!");
+        };
+        greet();
+        let adding=()=>{
+            let a=20;
+            let b=30;
+            return a+b;
+        };
+        console.log(adding());
+        let product=(a,b)=>{
+            return a*b;
+        };
+        console.log(product (20,10));
+    </script>
+</body>
+</html>

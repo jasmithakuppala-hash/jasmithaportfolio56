@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        localStorage.setItem("name","jasmitha");
+        localStorage.setItem("id",2510030056);
+        localStorage.setItem("city","Hyderabad");
+        let person=["Jasmitha",2510030056,"Student"];
+        localStorage.setItem("list",person);
+        let student={
+            name :"Rahul",
+            id: 2510030122
+        };
+        localStorage.setItem("Student",JSON.stringify(student));
+        localStorage.removeItem("Student");
+        localStorage.removeItem("name");
+        localStorage.removeItem("id");
+        localStorage.removeItem("city");
+        localStorage.removeItem("list");
+        let fruits=["Apple","Mango","Orange"];
+        localStorage.setItem("fruitlist",JSON.stringify(fruits));
+        let storedfruits=JSON.parse(localStorage.getItem("fruitlist"));
+        console.log("Data collected: ",storedfruits);
+
+        
+    </script>
+</body>
+</html>

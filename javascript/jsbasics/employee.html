@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class employee{
+            constructor(name,id){
+            this.name=name;
+            this.id=id;
+        }
+    display(){
+        console.log("Name="+this.name+"\nid is:"+this.id);
+    }
+        }
+let e = new employee("Jasmitha",56);
+e.display();
+class work extends employee{
+    constructor(name,id,desig){
+        super(name,id);
+        this.desig=desig;
+    }
+    display(){
+        super.display();
+        console.log("Designation ="+this.desig);
+    }
+}
+    let w=new work("Jasmitha",2510030056,"bye");
+    w.display()
+
+    </script>
+</body>
+</html>

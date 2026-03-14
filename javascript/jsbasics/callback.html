@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    let greet = function(name,callback1,callback2){
+            console.log(name);
+            callback1();
+            callback2();
+    }
+    let sayhai=()=>{
+        console.log("Namaste !!");
+    }
+    let saybye=()=>{
+        console.log("Bye!!");
+    }
+    greet("Jasmitha",sayhai,saybye);
+      </script> 
+</body>
+</html>
