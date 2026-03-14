@@ -1,0 +1,23 @@
+p,li{
+    font-size: 25px;
+
+}
+h2{
+    font-size: 32px;
+}
+.body-background{
+    background-image: url("imgb.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: Roboto;
+    color:beige;
+    
+}
+.nav-barr{
+    background-color:rgb(241, 248, 255);
+    width:fit-content;
+    padding: 25px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}

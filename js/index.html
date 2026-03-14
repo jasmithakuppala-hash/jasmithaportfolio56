@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Projects - Jasmitha</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f0c29, #302b63);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            margin-bottom: 50px;
+        }
+
+        .projects-container {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .project-card {
+            background: #1a1f3d;
+            padding: 35px;
+            border-radius: 20px;
+            transition: 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px #4da6ff;
+        }
+
+        .project-card a {
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .project-card h2 {
+            color: #4da6ff;
+        }
+
+        @media (max-width: 768px) {
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .back-btn {
+            margin-top: 60px;
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #2a6cff, #4da6ff);
+            border-radius: 30px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>JavaScript Mini Projects</h1>
+
+<div class="projects-container">
+
+    <div class="project-card">
+        <a href="../javascript/agepredictor/index.html">
+            <h2>🎯 Age Predictor</h2>
+            <p>Number guessing game using JavaScript logic</p>
+        </a>
+    </div>
+
+    <div class="project-card">
+        <a href="../javascript/changebgcolor/index.html">
+            <h2>🎨 Color Changer</h2>
+            <p>Random background color generator</p>
+        </a>
+    </div>
+   <div class="project-card">
+    <a href="../javascript/calculator/index.html">
+        <h2>🧮 Arithmetic Calculator</h2>
+        <p>Perform addition, subtraction, multiplication & division</p>
+    </a>
+</div>
+
+<div class="project-card">
+    <a href="../javascript/counter/index.html">
+        <h2>🔢 Counter App</h2>
+        <p>Increment, decrement & reset counter using JavaScript</p>
+    </a>
+</div>
+    <div class="project-card">
+        <a href="../javascript/imagenhancer/index.html">
+            <h2>🔍 Image Zoom</h2>
+            <p>Zoom in & zoom out functionality</p>
+        </a>
+    </div>
+
+    <div class="project-card">
+        <a href="../javascript/loginform/index.html">
+            <h2>🔐 Login Validation</h2>
+            <p>Basic username & password verification</p>
+        </a>
+    </div>
+
+    <div class="project-card">
+        <a href="../javascript/tossgame/index.html">
+            <h2>🪙 Coin Toss</h2>
+            <p>Random heads or tails generator</p>
+        </a>
+    </div>
+
+    <div class="project-card">
+        <a href="../javascript/simpleintrest/index.html">
+            <h2>💰 Simple Interest Calculator</h2>
+            <p>Basic arithmetic calculation project</p>
+        </a>
+    </div>
+
+</div>
+
+<a href="../index.html" class="back-btn">⬅ Back to Portfolio</a>
+
+</body>
+</html>
